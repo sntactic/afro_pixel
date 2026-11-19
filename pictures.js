@@ -1,4 +1,4 @@
-[
+export let pictures = [
 	{
 		"id": 1,
 		"nom": "Femme noire",
