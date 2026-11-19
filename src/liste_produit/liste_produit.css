@@ -1,0 +1,23 @@
+.liste_produits{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .shape_carte_produit{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .image_produit{
+        width: 230px;
+        height: 230px;
+        border-radius: 50px;
+    }
+
+    .div_actions{
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+}
