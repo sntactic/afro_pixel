@@ -1,7 +1,7 @@
-export let pictures = [
+[
 	{
 		"id": 1,
-		"nom": "Femme noire",
+		"nom": "Femme blanche",
 		"prix": 25000,
 		"categorie": "art",
 		"url": "images/blackness.jpg"

@@ -1,4 +1,4 @@
-import { pictures } from "../pictures.js";
+import pictures from "../pictures.json" with {type: "json"};
 
 class CarteProduit {
     constructor(id, nom, prix, categorie, url) {
