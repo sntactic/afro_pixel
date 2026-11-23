@@ -1,49 +1,40 @@
 import pictures from "../pictures.json" with {type: "json"};
+import { CarteProduit } from "./CarteProduit.js";
+import { ListeProduit } from "./ListeProduit.js";
+import { Panier } from "./Panier.js";
 
-class CarteProduit {
-    constructor(id, nom, prix, categorie, url) {
-        this.id = id;
-        this.nom = nom;
-        this.prix = prix;
-        this.categorie = categorie;
-        this.url = url;
-    }
 
-    rendre(){
-        return `
-            <div class="shape_carte_produit">
-                <img class="image_produit" src="${this.url}">
-                <div>${this.nom}</div>
-                <div>${this.prix} CFA</div>
-                <div class="div_actions">
-                    <button>+</button>
-                    <button>-</button>
-                </div>
-            </div>
-        `
-    }
+//Gestion du catalogue des produits
+let carte_produits = pictures.map(p => new CarteProduit(p.id, p.nom, p.prix, p.categorie, p.url))
+const liste_produits = new ListeProduit(carte_produits)
+document.querySelector("#catalogue").innerHTML = liste_produits.rendre()
+
+//Gestion du panier
+const buton_panier = document.getElementById("logo")
+const panier_div = document.querySelector(".panier")
+const PANIER = new Panier()
+
+function metteAJourPanier(){
+    panier_div.innerHTML = PANIER.rendre()
 }
 
-class ListeProduit{
-    constructor(pictures){
-        this.carteProduits = []
-        for (const picture of pictures) {
-            this.carteProduits.push(
-                new CarteProduit(picture.id, picture.nom, picture.prix, picture.categorie, picture.url)
-            )
-        }
-    }
+buton_panier.addEventListener("click", ()=>{
+    metteAJourPanier()
+    panier_div.classList.toggle("masquer")
+});
 
-    rendre(){
-        let rendu = ''
-        for (const carteProduit of this.carteProduits) {
-            rendu += carteProduit.rendre()
-        }
+function ajouterPanier(id, nom, prix, categorie, url){
+    const produit = new CarteProduit(id, nom, prix, categorie, url)
+    PANIER.ajouterPanier(produit)
+    metteAJourPanier()
+}window.ajouterPanier = ajouterPanier;
 
-        return `<div class="liste_produits">${rendu}</div>`
-    }
-}
+function augmenterQuantite(id){
+    PANIER.augmenterQuantite(id)
+    metteAJourPanier()
+}window.augmenterQuantite = augmenterQuantite;
 
-const liste_produits = new ListeProduit(pictures)
-
-document.body.innerHTML += liste_produits.rendre()
+function diminuerQuantite(id){
+    PANIER.diminuerQuantite(id)
+    metteAJourPanier()
+}window.diminuerQuantite = diminuerQuantite;

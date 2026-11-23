@@ -1,0 +1,38 @@
+.panier{
+    position: absolute;
+    width: 60%;
+    max-height: 71%;
+    top: 23%;
+    right: 17%;
+    background-color: rgba(51, 51, 51, 0.7);
+    text-align: center;
+    padding: 2%;
+    z-index: 1000;
+    overflow: scroll;
+    color: white;
+}
+
+.panier .div_actions *{
+    display: block;
+}
+
+.panier .ajouter_panier{
+    display: none;
+}
+
+.panier .shape_carte_produit{
+    
+    flex-direction: row;
+    flex-wrap: wrap;
+    .image_produit{
+        width: 100px;
+        height: 75px;
+        border-radius: 50px;
+    }
+}
+
+.panier .liste_produits{
+    flex-direction: column;
+    gap: 5px;
+    overflow: scroll;
+}
