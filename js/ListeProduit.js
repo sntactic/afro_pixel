@@ -1,16 +1,11 @@
-import { CarteProduit } from "./CarteProduit.js"
-
 export class ListeProduit{
     constructor(pictures){
         this.carteProduits = pictures
     }
 
     rendre(){
-        let rendu = ''
-        for (const carteProduit of this.carteProduits) {
-            rendu += carteProduit.rendre()
-        }
+        let rendu = this.carteProduits.map(p => p.rendre()).join("")
 
-        return rendu
+        return `<div class="liste_produits">${rendu}</div>`
     }
 }

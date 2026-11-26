@@ -1,40 +1,42 @@
-let produits_panier = []
+import { ListeProduit } from './ListeProduit.js'
 
 export class Panier{
+    constructor(){
+        this.produits_panier = []
+    }
+    
     rendre(){
-        let rendu = ''
-        for (const carteProduit of produits_panier) {
-            rendu += carteProduit.rendre()
-        }
+        const liste_produits_panier = new ListeProduit(this.produits_panier)
 
+        const total = this.produits_panier.map(p => p.prix * p.quantite).reduce((a,b)=>a+b, 0)
         return `
-            <h2>Panier</h2>
-            <div class="liste_produits">${rendu}</div>
+            <h2>Panier : Total : ${total} CFA</h2>
+            ${liste_produits_panier.rendre()}
         `
     }
 
     ajouterPanier(produit){
-        const existe = produits_panier.some(p => p.id === produit.id)
+        console.log(produit)
+        const existe = this.produits_panier.some(p => p.id === produit.id)
         if (existe) {
             alert("Produit déjà dans le panier")
             return
         }
 
-        produits_panier.push(produit)
+        this.produits_panier.push(produit)
     }
 
     augmenterQuantite(id){
-        const produit = produits_panier.find(p => p.id === id)
+        const produit = this.produits_panier.find(p => p.id === id)
         produit.quantite += 1
     }
 
     diminuerQuantite(id){
-        const produit = produits_panier.find(p => p.id === id)
+        const produit = this.produits_panier.find(p => p.id === id)
         if(produit.quantite >1){
             produit.quantite -= 1
         }else{
-            produits_panier.pop(produit)
+            this.produits_panier.pop(produit)
         }
-        
     }
 }
